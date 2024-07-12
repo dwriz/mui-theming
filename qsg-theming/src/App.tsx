@@ -3,10 +3,13 @@ import SuccessButton from "./components/SuccessButton";
 import WaitingButton from "./components/WaitingButton";
 import FailedButton from "./components/FailedButton";
 import DefaultButton from "./components/DefaultButton";
+import SuccessSnackbar from "./components/SuccessSnackbar";
+import WaitingSnackbar from "./components/WaitingSnackbar";
+import FailedSnackbar from "./components/FailedSnackbar";
 import { Box, Typography } from "@mui/material";
 
 export default function App() {
-  const [status, setStatus] = useState("SUCCESS");
+  const [status, setStatus] = useState("DEFAULT");
 
   return (
     <Box
@@ -28,6 +31,9 @@ export default function App() {
         <FailedButton onClick={() => setStatus("FAILED")} />
         <DefaultButton onClick={() => setStatus("DEFAULT")} />
       </Box>
+      <SuccessSnackbar open={status === "SUCCESS"} />
+      <WaitingSnackbar open={status === "WAITING"} />
+      <FailedSnackbar open={status === "FAILED"} />
     </Box>
   );
 }
