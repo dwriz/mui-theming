@@ -9,7 +9,7 @@ import FailedSnackbar from "./components/FailedSnackbar";
 import { Box, Typography } from "@mui/material";
 
 export default function App() {
-  const [status, setStatus] = useState("DEFAULT");
+  const [status, setStatus] = useState("SUCCESS");
 
   return (
     <Box
