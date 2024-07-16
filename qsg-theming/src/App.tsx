@@ -1,39 +1,25 @@
-import { useState } from "react";
-import SuccessButton from "./components/SuccessButton";
-import WaitingButton from "./components/WaitingButton";
-import FailedButton from "./components/FailedButton";
-import DefaultButton from "./components/DefaultButton";
-import SuccessSnackbar from "./components/SuccessSnackbar";
-import WaitingSnackbar from "./components/WaitingSnackbar";
-import FailedSnackbar from "./components/FailedSnackbar";
-import { Box, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
+import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
+import theme from "./libs/theme/theme";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorIcon from "@mui/icons-material/Error";
+import InfoIcon from "@mui/icons-material/Info";
 
 export default function App() {
-  const [status, setStatus] = useState("SUCCESS");
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        color: "white",
-      }}
-    >
-      <Typography variant="h4" gutterBottom>
-        Status: {status}
-      </Typography>
-      <Box sx={{ display: "flex", gap: 2 }}>
-        <SuccessButton onClick={() => setStatus("SUCCESS")} />
-        <WaitingButton onClick={() => setStatus("WAITING")} />
-        <FailedButton onClick={() => setStatus("FAILED")} />
-        <DefaultButton onClick={() => setStatus("DEFAULT")} />
+    <ThemeProvider theme={theme}>
+      <Box>
+        <Alert icon={<CheckCircleIcon />} severity="success">
+          Your site is published
+        </Alert>
+        <Alert icon={<InfoIcon />} severity="info">
+          Publishing
+        </Alert>
+        <Alert icon={<ErrorIcon />} severity="error">
+          Your site failed to deploy
+        </Alert>
       </Box>
-      <SuccessSnackbar open={status === "SUCCESS"} />
-      <WaitingSnackbar open={status === "WAITING"} />
-      <FailedSnackbar open={status === "FAILED"} />
-    </Box>
+    </ThemeProvider>
   );
 }
